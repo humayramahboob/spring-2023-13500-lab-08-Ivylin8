@@ -82,3 +82,52 @@ for (int row = height /4; row < height * 3/4; row++){
 writeImage ("taskD.pgm",out,height,width);
 }
 
+//Task E
+void scale(std::string input){
+  int height, width;
+  int image[MAX_H][MAX_W];
+  int output[MAX_H][MAX_W];
+  readImage(input, image, height,width);
+ int out[MAX_H] [MAX_W];
+
+for (int row = 0; row < height; row++){
+  for (int col = 0; col < width; col++){
+    output[row * 2][col * 2] = image[row][col];
+			output[row * 2][col * 2 + 1] = image[row][col];
+			output[row * 2 + 1][col * 2] = image[row][col];
+			output[row * 2 + 1][col * 2 + 1] = image[row][col];
+  }
+}
+height *= 2;
+width *= 2;
+
+  writeImage ("taskD.pgm",out,height,width);
+}
+
+//Task F
+void pixelate(std::string input) {
+  const int PIXEL_SIZE = 2;
+  int height, width;
+  int image[MAX_H][MAX_W];
+  readImage(input, image, height, width);
+
+  for (int row = 0; row < height; row += PIXEL_SIZE) {
+    for (int col = 0; col < width; col += PIXEL_SIZE) {
+      int sum = 0;
+      for (int i = row; i < row + PIXEL_SIZE; i++) {
+        for (int j = col; j < col + PIXEL_SIZE; j++) {
+          sum += image[i][j]; ]
+        }
+      }
+      int avg = sum / (PIXEL_SIZE * PIXEL_SIZE); 
+      for (int i = row; i < row + PIXEL_SIZE; i++) {
+        for (int j = col; j < col + PIXEL_SIZE; j++) {
+          image[i][j] = avg; 
+        }
+      }
+    }
+  }
+
+  writeImage("taskD.pgm", image, height, width); 
+}
+
